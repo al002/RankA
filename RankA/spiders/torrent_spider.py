@@ -7,4 +7,6 @@ class TorrentSpider(scrapy.Spider):
 
 
     def parse(self, response):
-        print(response.body)
+        for sel in response.xpath("//ul[@class='clearfix']/li"):
+            title = sel.xpath("div[@class='coll-1']/strong/a/text()").extract();
+            print(title)
