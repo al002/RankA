@@ -14,6 +14,6 @@ class TorrentItem(scrapy.Item):
     seeders = scrapy.Field();
     leechers = scrapy.Field();
     size = scrapy.Field();
-    category = scrapy.Field();
+    #category = scrapy.Field();
     # define the fields for your item here like:
     # name = scrapy.Field()
