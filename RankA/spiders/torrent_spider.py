@@ -26,10 +26,10 @@ class TorrentSpider(scrapy.Spider):
     def parse_torrent(self, response):
         for sel in response.css('div.domain-box'):
             item = TorrentItem()
-            item['title'] = sel.css('div.top-row > strong::text').extract()[0]
+            item['title'] = sel.css('div.top-row > strong::text').extract_first()
             item['infoHash'] = sel.xpath('//div[@class="infohash-box"]/p/text()').extract()[1].replace(':', '').strip()
-            item['seeders'] = sel.xpath('//ul/li/span[@class="green"]/text()').extract()[0]
-            item['leechers'] = sel.xpath('//ul/li/span[@class="red"]/text()').extract()[0]
-            item['size'] = sel.css('div.category-detail ul > li > span')[3].xpath('text()').extract()[0]
+            item['seeders'] = sel.xpath('//ul/li/span[@class="green"]/text()').extract_first()
+            item['leechers'] = sel.xpath('//ul/li/span[@class="red"]/text()').extract_first()
+            item['size'] = sel.css('div.category-detail ul > li > span')[3].xpath('text()').extract_first()
             yield item
 
