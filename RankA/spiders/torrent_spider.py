@@ -31,5 +31,6 @@ class TorrentSpider(scrapy.Spider):
             item['seeders'] = sel.xpath('.//ul/li/span[@class="green"]/text()').extract_first()
             item['leechers'] = sel.xpath('.//ul/li/span[@class="red"]/text()').extract_first()
             item['size'] = sel.css('div.category-detail ul > li > span')[3].xpath('text()').extract_first()
+            item['category'] = sel.xpath('.//ul[@class="category-name"]/li/a/text()').extract()
             yield item
 
