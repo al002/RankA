@@ -10,7 +10,7 @@ import scrapy
 
 class TorrentItem(scrapy.Item):
     title = scrapy.Field();
-    infoHash = scrapy.Field();
+    magnet_uri = scrapy.Field();
     seeders = scrapy.Field();
     leechers = scrapy.Field();
     size = scrapy.Field();

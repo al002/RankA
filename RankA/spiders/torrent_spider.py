@@ -27,7 +27,7 @@ class TorrentSpider(scrapy.Spider):
         for sel in response.css('div.domain-box'):
             item = TorrentItem()
             item['title'] = sel.css('div.top-row > strong::text').extract_first()
-            item['infoHash'] = sel.xpath('.//div[@class="infohash-box"]/p/text()').extract()[1].replace(':', '').strip()
+            item['magnet_uri'] = sel.xpath('.//ul[@class="download-links"]/li[1]/a/@href').extract_first()
             item['seeders'] = sel.xpath('.//ul/li/span[@class="green"]/text()').extract_first()
             item['leechers'] = sel.xpath('.//ul/li/span[@class="red"]/text()').extract_first()
             item['size'] = sel.css('div.category-detail ul > li > span')[3].xpath('text()').extract_first()
