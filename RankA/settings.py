@@ -14,6 +14,8 @@ BOT_NAME = 'RankA'
 SPIDER_MODULES = ['RankA.spiders']
 NEWSPIDER_MODULE = 'RankA.spiders'
 
+MONGO_URI = 'localhost:27017'
+MONGO_DATABASE = 'torrents'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'RankA (+http://www.yourdomain.com)'
@@ -61,9 +63,9 @@ NEWSPIDER_MODULE = 'RankA.spiders'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'RankA.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'RankA.pipelines.MongoPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
