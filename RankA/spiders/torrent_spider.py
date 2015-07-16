@@ -8,12 +8,19 @@ class TorrentSpider(scrapy.Spider):
     name = '1337x'
     allowed_domains = ['1337x.to']
     start_urls = ['http://1337x.to/sub/42/0/']
+    domain = 'http://1337x.to'
 
 
     def parse(self, response):
-        for href in response.xpath('//ul[@class="clearfix"]/li/div[@class="coll-1"]/strong/a/@href'):
+        for href in response.xpath('//div[@class="tab-detail"]/ul[@class="clearfix"]/li/div[@class="coll-1"]/strong/a/@href'):
             url = response.urljoin(href.extract())
             yield scrapy.Request(url, callback=self.parse_torrent)
+
+        next_page_sel = response.xpath('//div[@class="pagging-box"]/ul/li/a[contains(.//text(), ">>")]')
+
+        if next_page_sel:
+            next_link = next_page_sel.xpath('@href').extract()[0]
+            yield scrapy.Request(self.domain + next_link, callback=self.parse)
 
 
     def parse_torrent(self, response):
