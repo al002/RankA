@@ -17,6 +17,12 @@ NEWSPIDER_MODULE = 'RankA.spiders'
 MONGO_URI = 'localhost:27017'
 MONGO_DATABASE = 'torrents'
 
+# USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+
+# DEFAULT_REQUEST_HEADERS = {
+#     'referer': 'http://movie.douban.com/tag/'
+# }
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'RankA (+http://www.yourdomain.com)'
 
