@@ -1,10 +1,13 @@
+sudo: false
 language: python
 
 python:
   - "2.7"
 
-before_install:
-  - sudo apt-get install python-lxml
+addons:
+  apt:
+    packages:
+      - python-lxml
 
 install:
   - pip2 install service_identity
