@@ -5,6 +5,8 @@ python:
 
 before_install:
   - sudo apt-get install python-lxml
+
+install:
   - pip2 install service_identity
   - pip2 install pymongo
   - pip2 install scrapy
