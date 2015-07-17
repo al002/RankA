@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - "2.7"
+
+before_install:
+  - sudo apt-get install python-lxml
+  - sudo pip2 install service_identity
+  - sudo pip2 install pymongo
+  - sudo pip2 install scrapy
+
+matrix:
+  exclude:
+    - python: "3.3"
+    - python: "3.4"
