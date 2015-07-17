@@ -7,7 +7,7 @@ from RankA.items import TorrentItem
 class TorrentSpider(scrapy.Spider):
     name = '1337x'
     allowed_domains = ['1337x.to']
-    start_urls = ['http://1337x.to/sub/42/0/', 'http://1337x.to/sub/41/0/', 'http://1337x.to/cat/Anime/0/']
+    start_urls = ['https://1337x.to/sub/42/0/', 'https://1337x.to/sub/41/0/', 'https://1337x.to/cat/Anime/0/']
 
 
     def parse(self, response):
