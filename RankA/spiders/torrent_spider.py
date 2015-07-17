@@ -7,8 +7,7 @@ from RankA.items import TorrentItem
 class TorrentSpider(scrapy.Spider):
     name = '1337x'
     allowed_domains = ['1337x.to']
-    start_urls = ['https://1337x.to/sub/42/0/', 'https://1337x.to/sub/41/0/', 'https://1337x.to/cat/Anime/0/']
-    domain = 'http://1337x.to'
+    start_urls = ['http://1337x.to/sub/42/0/', 'http://1337x.to/sub/41/0/', 'http://1337x.to/cat/Anime/0/']
 
 
     def parse(self, response):
@@ -19,8 +18,8 @@ class TorrentSpider(scrapy.Spider):
         next_page_sel = response.xpath('//div[@class="pagging-box"]/ul/li/a[contains(.//text(), ">>")]')
 
         if next_page_sel:
-            next_link = next_page_sel.xpath('@href').extract()[0]
-            yield scrapy.Request(self.domain + next_link, callback=self.parse)
+            next_link = response.urljoin(next_page_sel.xpath('@href').extract_first())
+            yield scrapy.Request(next_link, callback=self.parse)
 
 
     def parse_torrent(self, response):
