@@ -15,3 +15,7 @@ class TorrentItem(scrapy.Item):
     leechers = scrapy.Field();
     size = scrapy.Field();
     category = scrapy.Field();
+
+
+class MovieIdItem(scrapy.Item):
+    movie_id = scrapy.Field();

@@ -9,10 +9,14 @@
 import pymongo
 
 
+from RankA.items import TorrentItem, MovieIdItem
+
+
 class MongoPipeline(object):
 
 
-    collection_name = 'torrents'
+    torrents_collection = 'torrents'
+    movie_id_collection = 'movieId'
 
 
     def __init__(self, mongo_uri, mongo_db):
@@ -38,5 +42,11 @@ class MongoPipeline(object):
 
 
     def process_item(self, item, spider):
-        self.db[self.collection_name].insert(dict(item))
+        if isinstance(item, TorrentItem):
+            self.db[self.torrents_collection].insert(dict(item))
+        if isinstance(item, MovieIdItem):
+            found = self.db[self.movie_id_collection].find({"movie_id":
+                item['movie_id']}).count()
+            if not found:
+                self.db[self.movie_id_collection].insert(dict(item))
         return item
