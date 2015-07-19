@@ -43,7 +43,12 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         if isinstance(item, TorrentItem):
-            self.db[self.torrents_collection].insert(dict(item))
+            isFound = self.db[self.torrents_collection].find({"title":
+                item['title']}).count()
+
+            if not isFound:
+                self.db[self.torrents_collection].insert(dict(item))
+
         if isinstance(item, MovieIdItem):
             found = self.db[self.movie_id_collection].find({"movie_id":
                 item['movie_id']}).count()

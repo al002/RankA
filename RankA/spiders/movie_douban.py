@@ -7,7 +7,7 @@ from RankA.items import MovieIdItem
 
 
 class MovieDoubanSpider(scrapy.Spider):
-    name = "movie.douban"
+    name = "movie_douban"
     allowed_domains = ["douban.com"]
     start_urls = (
         'http://movie.douban.com/tag/',
