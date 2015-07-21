@@ -7,6 +7,7 @@ from RankA.items import MovieIdItem
 
 
 class MovieDoubanSpider(scrapy.Spider):
+    download_delay = 3
     name = "movie_douban"
     allowed_domains = ["douban.com"]
     start_urls = (
