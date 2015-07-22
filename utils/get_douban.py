@@ -1,4 +1,3 @@
-import time
 import pymongo
 import requests
 
@@ -12,6 +11,10 @@ client = pymongo.MongoClient(mongo_uri)
 db = client[mongo_db]
 
 movies = db.movieId.find()
+proxies = {
+    "http": "http://localhost:8123",
+    "https": "http://localhost:8123",
+}
 
 for movie in movies:
     id = movie['movie_id']
@@ -20,10 +23,9 @@ for movie in movies:
     
     if not found:
         try:
-            r = requests.get(douban_api + movie['movie_id'])
+            r = requests.get(douban_api + movie['movie_id'], proxies=proxies)
             print(r)
             db['movies'].insert(r.json())
-            time.sleep(3)
 
             try:
                 r.raise_for_status()
