@@ -26,13 +26,11 @@ for movie in movies:
             r = requests.get(douban_api + movie['movie_id'], proxies=proxies)
             print(r)
             db['movies'].insert(r.json())
-
-            try:
-                r.raise_for_status()
-            except requests.exceptions.HTTPError as e:
-                print "And you get an HTTPError:", e.message
+            r.raise_for_status()
         except requests.exceptions.ConnectionError as e:
-            db['failed_id'].insert({'id': movie['movie_id']})
+            db['failedId'].insert({'id': movie['movie_id']})
             print('request failed')
+        except requests.exceptions.HTTPError as e:
+            print('status error')
 
 
