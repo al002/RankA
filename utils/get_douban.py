@@ -1,3 +1,4 @@
+import time
 import pymongo
 import requests
 
@@ -31,6 +32,7 @@ for movie in movies:
             db['failedId'].insert({'id': movie['movie_id']})
             print('request failed')
         except requests.exceptions.HTTPError as e:
+            db['failedId'].insert({'id': movie['movie_id']})
+            print('status error recorded')
+            time.sleep(12)
             print('status error')
-
-
